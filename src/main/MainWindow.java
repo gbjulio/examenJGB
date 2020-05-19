@@ -14,6 +14,7 @@ import newpackage.Film;
  * @author javier
  */
 public class MainWindow extends javax.swing.JFrame {
+
     private String busqueda;
     private DefaultTableModel modeloTabla = new DefaultTableModel();
     private List<Film> peliculas;
@@ -24,92 +25,96 @@ public class MainWindow extends javax.swing.JFrame {
      */
     public MainWindow() {
         initComponents();
-        
+
         iniciarComponentes();
     }
-    
-    public void iniciarComponentes(){
+
+    //Método que inicia componentes
+    public void iniciarComponentes() {
         busqueda = "";
         peliculas = null;
         controlador = new Controlador();
         iniciarTabla();
         actionButtonListar();
     }
-    
-    public void iniciarTabla(){
+
+    //Método que inicia la tabla
+    public void iniciarTabla() {
         modeloTabla.addColumn("Título");
         modeloTabla.addColumn("Año");
         modeloTabla.addColumn("Duración");
         modeloTabla.addColumn("Características");
-        
+
         tabla.setModel(modeloTabla);
     }
-    
-    public void actualizarTabla(){
+
+    //Método que actualiza la tabla
+    public void actualizarTabla() {
         limpiarTabla();
-        
-        for(Film f: peliculas){
-            modeloTabla.addRow(new Object[]{f.getTitle(), f.getReleaseYear(), 
+
+        for (Film f : peliculas) {
+            modeloTabla.addRow(new Object[]{f.getTitle(), f.getReleaseYear(),
                 f.getLength(), f.getSpecialFeatures()});
         }
     }
-    
-    public void limpiarTabla(){
+
+    //Método que limpia la tabla
+    public void limpiarTabla() {
         int rows = modeloTabla.getRowCount();
-        
-        for(int i=0;i<rows;i++){
+
+        for (int i = 0; i < rows; i++) {
             modeloTabla.removeRow(0);
         }
     }
-    
-    public void listar(){
+
+    public void listar() {
         peliculas = controlador.listar();
     }
-    
-    public void actionButtonListar(){
+
+    public void actionButtonListar() {
         listar();
         actualizarTabla();
     }
-    
-    public void buscarNombre(){
+
+    public void buscarNombre() {
         peliculas = controlador.buscarPeliculas(busqueda);
     }
-    
-    public void actionButtonBuscarNombre(){
+
+    public void actionButtonBuscarNombre() {
         IntroducirBusqueda dialogoBusqueda = new IntroducirBusqueda(this, true);
         dialogoBusqueda.setVisible(true);
-        
-        if(dialogoBusqueda.getAceptarCancelar() > 0){
+
+        if (dialogoBusqueda.getAceptarCancelar() > 0) {
             busqueda = dialogoBusqueda.getBusqueda();
             buscarNombre();
             actualizarTabla();
         }
     }
-    
-    public void buscarCategoria(){
+
+    public void buscarCategoria() {
         peliculas = controlador.buscarPorCategoria(busqueda);
     }
-    
-    public void actionButtonBuscarCategoria(){
+
+    public void actionButtonBuscarCategoria() {
         ElegirCaracteristica ec = new ElegirCaracteristica(this, true, controlador.arrayCategorias());
         ec.setVisible(true);
-        
-        if(ec.getAceptarCancelar() > 0){
+
+        if (ec.getAceptarCancelar() > 0) {
             busqueda = ec.getSelectedItem();
             buscarCategoria();
             actualizarTabla();
         }
     }
-    
-    public void buscarCaracteristica(){
+
+    public void buscarCaracteristica() {
         peliculas = controlador.buscarPorCaracteristicasEspeciales(busqueda);
     }
-    
-    public void actionButtonBuscarCaracteristicas(){
+
+    public void actionButtonBuscarCaracteristicas() {
         ElegirCaracteristica ec = new ElegirCaracteristica(this, true, controlador.distinctCaracteristicas());
         ec.setVisible(true);
-        
-        if(ec.getAceptarCancelar() > 0){
+
+        if (ec.getAceptarCancelar() > 0) {
             busqueda = ec.getSelectedItem();
             buscarCaracteristica();
             actualizarTabla();

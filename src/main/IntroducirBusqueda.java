@@ -10,36 +10,41 @@ package main;
  * @author javier
  */
 public class IntroducirBusqueda extends javax.swing.JDialog {
+
     private int aceptarCancelar;
+
     /**
      * Creates new form IntroducirBusqueda
      */
     public IntroducirBusqueda(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         iniciarComponentes();
     }
-    
-    public void iniciarComponentes(){
+
+    //Método que inicia componentes
+    public void iniciarComponentes() {
         aceptarCancelar = 0;
     }
-    
-    public void aceptar(){
+
+    //Método utilizado para la opción de aceptar
+    public void aceptar() {
         aceptarCancelar = 1;
         this.dispose();
     }
-    
-    public void cancelar(){
+
+    //Método utilizado para la opción cancelar
+    public void cancelar() {
         aceptarCancelar = -1;
         this.dispose();
     }
-    
-    public int getAceptarCancelar(){
+
+    public int getAceptarCancelar() {
         return aceptarCancelar;
     }
-    
-    public String getBusqueda(){
+
+    public String getBusqueda() {
         return inputTextBusqueda.getText();
     }
 

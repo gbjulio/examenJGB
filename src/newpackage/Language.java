@@ -18,14 +18,18 @@ public class Language  implements java.io.Serializable {
      private Set filmsForLanguageId = new HashSet(0);
      private Set filmsForOriginalLanguageId = new HashSet(0);
 
+     //Método constructor vacío.
     public Language() {
     }
 
-	
+
+    //Método constructor parametrizado
     public Language(String name, Date lastUpdate) {
         this.name = name;
         this.lastUpdate = lastUpdate;
     }
+    
+    //Método constructor parametrizado 2
     public Language(String name, Date lastUpdate, Set filmsForLanguageId, Set filmsForOriginalLanguageId) {
        this.name = name;
        this.lastUpdate = lastUpdate;

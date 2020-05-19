@@ -29,34 +29,36 @@ public class ElegirCaracteristica extends javax.swing.JDialog {
         iniciarComponentes();
     }
 
+    //Método que inicia componentes
     public void iniciarComponentes() {
         modeloCombo = new DefaultComboBoxModel();
         aceptarCancelar = 0;
         cargarCombo();
     }
 
+    //Método para cargar el combo
     public void cargarCombo() {
         for (String str : cadenas) {
             modeloCombo.addElement(str);
         }
-        
+
         comboBox.setModel(modeloCombo);
     }
 
     public String getSelectedItem() {
         return (String) comboBox.getSelectedItem();
     }
-    
-    public int getAceptarCancelar(){
+
+    public int getAceptarCancelar() {
         return aceptarCancelar;
     }
-    
-    public void aceptar(){
+
+    public void aceptar() {
         aceptarCancelar = 1;
         this.dispose();
     }
-    
-    public void cancelar(){
+
+    public void cancelar() {
         aceptarCancelar = -1;
         this.dispose();
     }
